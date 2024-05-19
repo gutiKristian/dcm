@@ -193,6 +193,7 @@ private:
 
   template <typename T>
   bool GetNumberArray(VR vr, std::vector<T>* values) const {
+    vr_.set_code(vr.code());
     const std::size_t count = GetVM();
     values->resize(count);
     return GetNumberArray(vr, sizeof(T), count, &(*values)[0]);
@@ -221,7 +222,7 @@ protected:
   Tag tag_;
 
   // Value Representation.
-  VR vr_;
+  mutable VR vr_;
 
   // Little endian or big endian.
   ByteOrder byte_order_;
